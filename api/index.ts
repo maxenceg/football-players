@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 
+console.log('HEY')
 const app = express()
 
 const corsOptions = {

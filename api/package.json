@@ -2,12 +2,12 @@
   "name": "api",
   "version": "1.0.0",
   "description": "API to query football leagues, teams and players",
-  "main": "server.ts",
+  "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "tsc && node dist/server.js",
+    "start": "tsc && node dist/index.js",
     "lint": "eslint . --ext .ts",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "author": "maxenceg",
   "license": "ISC",
