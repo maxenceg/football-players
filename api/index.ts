@@ -1,7 +1,22 @@
 import express from 'express'
 import cors from 'cors'
+import mongoose from 'mongoose'
+import { dbConfig } from './config/db.config'
+import { router } from './router'
 
-console.log('HEY')
+// Connect to database
+mongoose.connect(dbConfig.url)
+const database = mongoose.connection
+
+database.on('error', (error) => {
+    console.log(error)
+})
+
+database.once('connected', () => {
+    console.log('Database Connected')
+})
+
+// Start express server
 const app = express()
 
 const corsOptions = {
