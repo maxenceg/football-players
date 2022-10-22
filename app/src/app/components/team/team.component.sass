@@ -1,0 +1,52 @@
+.team-container
+  padding: 10px
+
+h2
+  font-family: Roboto
+  font-weight: 600
+
+.players-container
+  margin-top: 10px
+  box-sizing: border-box
+  width: 100%
+
+  &__player
+    display: flex
+    flex-direction: row
+    width: 100%
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.3)
+    border-radius: 5px
+    overflow: hidden
+
+    &:nth-child(n + 2)
+      margin-top: 10px
+
+    &__image
+      width: 200px
+      height: 200px
+
+    &__info
+      display: flex
+      flex-direction: column
+      flex: 1
+      box-sizing: border-box
+      padding: 10px
+      font-size: 20px
+
+      &__name
+        font-family: Roboto
+        font-weight: 500
+        font-size: 30px
+
+.info-table
+  font-family: Roboto
+  font-weight: 400
+  margin-top: 20px
+
+  &__key
+    width: 150px
+    font-weight: 600
+    color: #333333
+
+  &__value
+    color: #555555
