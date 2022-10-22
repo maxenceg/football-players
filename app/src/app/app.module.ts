@@ -5,11 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TeamsListComponent } from './components/teams-list/teams-list.component';
 import { LeagueSelectorComponent } from './components/league-selector/league-selector.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent, LeagueSelectorComponent, SearchFilterPipe],
+  declarations: [
+    AppComponent,
+    LeagueSelectorComponent,
+    TeamsListComponent,
+    SearchFilterPipe,
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

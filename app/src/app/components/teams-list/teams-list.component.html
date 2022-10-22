@@ -1,0 +1,20 @@
+<div class="teams-list-container">
+  <app-league-selector (selectedLeagueEvent)="setSelectedLeague($any($event))"></app-league-selector>
+  <span class="error" *ngIf="errorMessage">{{ errorMessage }}</span>
+  <div *ngIf="selectedLeague">
+    <h4 *ngIf="teams.length > 0; else noTeams">League teams</h4>
+    <div class="teams-container">
+      <div
+        class="teams-container__team"
+        *ngFor="let team of teams;"
+        routerLink="/team/{{ team._id }}"
+      >
+        <img src="{{ team.thumbnail }}" class="teams-container__team__image" />
+        <div class="teams-container__team__name">{{ team.name }}</div>
+      </div>
+    </div>
+    <ng-template #noTeams>
+      <div class="teams-container">No teams were found for this league</div>
+    </ng-template>
+  </div>
+</div>

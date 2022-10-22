@@ -1,0 +1,33 @@
+.teams-list-container
+  padding: 10px
+
+.teams-container
+  margin-top: 10px
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  box-sizing: border-box
+  width: 100%
+
+  &__team
+    width: calc((100% - 5 * 10px) / 6)
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.3)
+    cursor: pointer
+    border-radius: 5px
+
+    &:not(:nth-child(6n + 1))
+      margin-left: 10px
+
+    &:nth-child(n + 7)
+      margin-top: 10px
+
+    &__image
+      width: 100%
+      aspect-ratio: 1
+
+    &__name
+      text-align: center
+      width: 100%
+      box-sizing: border-box
+      padding: 10px
+      font-size: 20px
