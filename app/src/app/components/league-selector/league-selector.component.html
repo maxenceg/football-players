@@ -1,0 +1,26 @@
+<div class="selector">
+  <div>
+    <span class="error" *ngIf="errorMessage">{{ errorMessage }}</span>
+    <div>
+      <input
+        type="text"
+        placeholder="Enter a football league"
+        [(ngModel)]="filterString"
+        (input)="filterLeagues(filterString)"
+        (focus)="showOptions()"
+        (blur)="hideOptions()"
+      />
+  </div>
+  <div *ngIf="shouldShowOptions" class="options-container">
+    <div class="options-container__inner">
+      <div
+        *ngFor="let league of leagues | searchFilter: filterString;"
+        class="options-container__inner__option"
+        (click)="selectLeague(league)"
+        (mousedown)=$event.preventDefault()
+      >
+        {{ league.name }}
+      </div>
+    </div>
+  </div>
+</div>
