@@ -1,7 +1,7 @@
 <div class="selector">
   <div>
     <span class="error" *ngIf="errorMessage">{{ errorMessage }}</span>
-    <div>
+    <div *ngIf="leagues.length > 0">
       <input
         type="text"
         placeholder="Enter a football league"

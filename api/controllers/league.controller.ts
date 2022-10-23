@@ -17,6 +17,10 @@ export const leagueRouter = Router()
  *             schema:
  *               type: object
  *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Whether the query succeeded or not.
+ *                   example: true
  *                 data:
  *                   type: array
  *                   items:
@@ -38,12 +42,16 @@ export const leagueRouter = Router()
  *                         type: string[]
  *                         description: The league's team identifiers.
  *                         example: ["abcde-12345", "fghij-67890"]
+ *                 error:
+ *                   type: string
+ *                   description: The error raised by calling the query.
+ *                   example: Could not get the leagues.
  */
 leagueRouter.get('/', async (_, res) => {
     try {
         const leagues = await db.league.find()
 
-        res.json(leagues)
+        res.json({ success: true, data: leagues })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -70,6 +78,10 @@ leagueRouter.get('/', async (_, res) => {
  *             schema:
  *               type: object
  *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Whether the query succeeded or not.
+ *                   example: true
  *                 data:
  *                   type: array
  *                   items:
@@ -91,6 +103,10 @@ leagueRouter.get('/', async (_, res) => {
  *                         type: string
  *                         description: A thumbnail of the team.
  *                         example: https://www.thesportsdb.com//images//media//team//badge//a1af2i1557005128.png
+ *                 error:
+ *                   type: string
+ *                   description: The error raised by calling the query.
+ *                   example: Could not find the corresponding league.
  */
 leagueRouter.get('/:leagueId/teams', async (req, res) => {
     try {
@@ -99,9 +115,18 @@ leagueRouter.get('/:leagueId/teams', async (req, res) => {
         } = req
         const league = await db.league.findOne({ _id: leagueId })
 
+        if (!league) {
+            res.json({
+                success: false,
+                error: 'Could not find the corresponding league.',
+            })
+
+            return
+        }
+
         const teams = await db.team.find({ _id: { $in: league.teams } })
 
-        res.json(teams)
+        res.json({ success: true, data: teams })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

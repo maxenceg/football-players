@@ -21,11 +21,19 @@ export class TeamsListComponent implements OnInit {
   setSelectedLeague(league: League) {
     this.selectedLeague = league;
     this.leagueService.getLeagueTeams(league._id).subscribe({
-      next: (data) => {
-        this.teams = data;
+      next: (result) => {
+        if (result.success) {
+          this.errorMessage = '';
+          this.teams = result.data;
+
+          return;
+        }
+
+        this.errorMessage = result.error;
       },
       error: (e) => {
-        this.errorMessage = e.message;
+        this.errorMessage =
+          'An unknown error occurred during communication with server.';
       },
     });
   }

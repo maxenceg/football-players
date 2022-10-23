@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { League } from '../models/league.model';
-import { Team } from '../models/team.model';
+import { LeaguesResult, LeagueTeamsResult } from '../models/league.model';
 
 const baseUrl = 'http://localhost:8080/leagues';
 
@@ -13,18 +12,18 @@ const baseUrl = 'http://localhost:8080/leagues';
 export class LeagueService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<League[]> {
+  getAll(): Observable<LeaguesResult> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.get<League[]>(baseUrl, {
+    return this.http.get<LeaguesResult>(baseUrl, {
       headers,
     });
   }
 
-  getLeagueTeams(leagueId: string): Observable<Team[]> {
+  getLeagueTeams(leagueId: string): Observable<LeagueTeamsResult> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.get<Team[]>(`${baseUrl}/${leagueId}/teams`, {
+    return this.http.get<LeagueTeamsResult>(`${baseUrl}/${leagueId}/teams`, {
       headers,
     });
   }

@@ -1,25 +1,27 @@
 <div class="team-container">
   <span class="error" *ngIf="errorMessage">{{ errorMessage }}</span>
-  <h2 *ngIf="team">{{ team.name }}'s players</h2>
-  <div *ngIf="team && team.players.length > 0; else noPlayers" class="players-container">
-    <div
-      class="players-container__player"
-      *ngFor="let player of team?.players;"
-    >
-      <img src="{{ player.thumbnail }}" class="players-container__player__image" />
-      <div class="players-container__player__info">
-        <span class="players-container__player__info__name">{{ player.name }}</span>
-        <table class="info-table">
-          <tbody>
-            <tr><td class="info-table__key">Position</td><td class="info-table__value">{{ player.position }}</td></tr>
-            <tr><td class="info-table__key">Birth date</td><td class="info-table__value">{{ player.born | date: 'fullDate' }}</td></tr>
-            <tr><td class="info-table__key">Price</td><td class="info-table__value">{{ player.signin | priceFormatter }}</td></tr>
-          </tbody>
-        </table>
+  <div *ngIf="team">
+    <h2 >{{ team.name }}'s players</h2>
+    <div *ngIf="team && team.players.length > 0; else noPlayers" class="players-container">
+      <div
+        class="players-container__player"
+        *ngFor="let player of team?.players;"
+      >
+        <img src="{{ player.thumbnail }}" class="players-container__player__image" />
+        <div class="players-container__player__info">
+          <span class="players-container__player__info__name">{{ player.name }}</span>
+          <table class="info-table">
+            <tbody>
+              <tr><td class="info-table__key">Position</td><td class="info-table__value">{{ player.position }}</td></tr>
+              <tr><td class="info-table__key">Birth date</td><td class="info-table__value">{{ player.born | date: 'fullDate' }}</td></tr>
+              <tr><td class="info-table__key">Price</td><td class="info-table__value">{{ player.signin | priceFormatter }}</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+    <ng-template #noPlayers>
+      <div class="players-container">No players were found for this team</div>
+    </ng-template>
   </div>
-  <ng-template #noPlayers>
-    <div class="players-container">No players were found for this team</div>
-  </ng-template>
 </div>

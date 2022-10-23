@@ -23,11 +23,19 @@ export class TeamComponent implements OnInit {
 
   getTeamInfo(teamId: string): void {
     this.teamService.getTeamInfo(teamId).subscribe({
-      next: (data) => {
-        this.team = data;
+      next: (result) => {
+        if (result.success) {
+          this.errorMessage = '';
+          this.team = result.data;
+
+          return;
+        }
+
+        this.errorMessage = result.error;
       },
       error: (e) => {
-        this.errorMessage = e.message;
+        this.errorMessage =
+          'An unknown error occurred during communication with server.';
       },
     });
   }

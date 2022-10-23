@@ -23,6 +23,10 @@ export const teamRouter = Router()
  *             schema:
  *               type: object
  *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Whether the query succeeded or not.
+ *                   example: true
  *                 data:
  *                   type: object
  *                   properties:
@@ -71,6 +75,10 @@ export const teamRouter = Router()
  *                                       type: string
  *                                       description: The player's signin currency.
  *                                       example: eur
+ *                 error:
+ *                   type: string
+ *                   description: The error raised by calling the query.
+ *                   example: 'Could not find the corresponding team.'
  */
 teamRouter.get('/:teamId', async (req, res) => {
     try {
@@ -79,9 +87,18 @@ teamRouter.get('/:teamId', async (req, res) => {
         } = req
         const team = await db.team.findOne({ _id: teamId })
 
+        if (!team) {
+            res.json({
+                success: false,
+                error: 'Could not find the corresponding team.',
+            })
+
+            return
+        }
+
         const players = await db.player.find({ _id: { $in: team.players } })
 
-        res.json({ name: team.name, players })
+        res.json({ success: true, data: { name: team.name, players } })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

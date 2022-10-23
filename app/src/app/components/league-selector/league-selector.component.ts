@@ -24,11 +24,19 @@ export class LeagueSelectorComponent implements OnInit {
 
   getAllLeagues(): void {
     this.leagueService.getAll().subscribe({
-      next: (data) => {
-        this.leagues = data;
+      next: (result) => {
+        if (result.success) {
+          this.errorMessage = '';
+          this.leagues = result.data;
+
+          return;
+        }
+
+        this.errorMessage = result.error;
       },
       error: (e) => {
-        this.errorMessage = e.message;
+        this.errorMessage =
+          'An error occurred while communicating with the server';
       },
     });
   }

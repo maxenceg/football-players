@@ -6,3 +6,10 @@ export type Team = {
   thumbnail: string;
   players: Player[];
 };
+
+export type TeamResult =
+  | {
+      success: true;
+      data: Team;
+    }
+  | { success: false; error: string };
