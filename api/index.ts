@@ -3,6 +3,9 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import { dbConfig } from './config/db.config'
 import { router } from './router'
+import swaggerUi from 'swagger-ui-express'
+import swaggerJsdoc from 'swagger-jsdoc'
+import { options } from './swagger-options'
 
 // Connect to database
 mongoose.connect(dbConfig.url)
@@ -32,6 +35,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/', router)
+
+const specs = swaggerJsdoc(options)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080
