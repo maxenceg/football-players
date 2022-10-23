@@ -1,7 +1,10 @@
 <div class="team-container">
   <span class="error" *ngIf="errorMessage">{{ errorMessage }}</span>
   <div *ngIf="team">
-    <h2 >{{ team.name }}'s players</h2>
+    <div class="header-container">
+      <h2 >{{ team.name }}'s players</h2>
+      <button routerLink="/teams-list">Back</button>
+    </div>
     <div *ngIf="team && team.players.length > 0; else noPlayers" class="players-container">
       <div
         class="players-container__player"
