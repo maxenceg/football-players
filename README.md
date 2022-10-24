@@ -6,6 +6,10 @@
 
 `cd api && npm run start`
 
+## Access app
+
+Launch App and access http://localhost:8081/
+
 ## Access API documentation
 
 Launch api and access http://localhost:8080/api-docs/
